@@ -7,7 +7,7 @@ on:
       - develop
 
 jobs:
-  lint:
+  format:
     runs-on: ubuntu-latest
     permissions:
       # To commit and push the changed files
@@ -41,8 +41,5 @@ jobs:
         name: 'Auto commit changes'
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: 'Apply formatting (automatic commit)'
+          commit_message: '(Automatic commit) Apply formatting'
           skip_dirty_check: false
-
-      - if: steps.auto-commit-changes.outputs.changes_detected == 'false'
-        run: echo "No formatting required"
