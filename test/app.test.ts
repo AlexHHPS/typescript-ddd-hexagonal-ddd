@@ -1,4 +1,4 @@
-import main from '../src/app';
+import main from '../src/app.js';
 
 describe('main', () => {
   it('should print "Example Node App!"', () => {

@@ -1,16 +1,18 @@
 {
   "name": "typescript-skeleton",
-  "version": "1.0.0",
+  "version": "1.0.2",
+  "type": "module",
   "description": "A simple TypeScript skeleton for easy tasks. For anything more complex, a DDD structure is recommended.",
-  "main": "app.ts",
+  "main": "src/app.ts",
   "scripts": {
     "start": "node ./dist/src/app.js",
     "dev": "ts-node-dev --rs --transpile-only ./src/app.ts",
     "dev:debug": "ts-node-dev --inspect --rs --transpile-only ./src/app.ts",
     "build": "tsc -p tsconfig.build.json",
-    "lint": "eslint --ignore-path .gitignore . --ext .ts",
+    "build:prod": "tsc -p tsconfig.build.prod.json",
+    "lint": "eslint --ignore-path .gitignore . --ext .ts --no-error-on-unmatched-pattern",
     "lint:fix": "npm run lint -- --fix",
-    "prettier": "npx prettier src test --check",
+    "prettier": "npx prettier src test --check --no-error-on-unmatched-pattern",
     "prettier:fix": "npm run prettier -- --write",
     "format": "npm run prettier:fix && npm run lint:fix",
     "test": "jest --verbose --detectOpenHandles"
@@ -24,7 +26,7 @@
     "typescript"
   ],
   "author": "Bosco Domingo",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/BoscoDomingo/typescript-skeleton/issues"
   },
@@ -41,6 +43,7 @@
     "@typescript-eslint/parser": "^5.59.0",
     "eslint": "^8.38.0",
     "eslint-config-prettier": "^8.8.0",
+    "eslint-import-resolver-typescript": "^3.5.5",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-jest": "^27.2.1",
     "prettier": "2.8.7",
