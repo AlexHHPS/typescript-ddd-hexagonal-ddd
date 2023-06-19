@@ -7,9 +7,9 @@ export class LocalDBUserRepository implements UserRepository {
 		await new Promise((resolve) => setTimeout(resolve, 1000));
 	}
 
-	public async findByCriteria(): Promise<User[]> {
-		console.log(`Finding users in local DB...`);
+	public async findByCriteria(): Promise<User> {
+		console.log(`Finding user in local DB...`);
 		await new Promise((resolve) => setTimeout(resolve, 1000));
-		return [];
+		return new User('1', 'John Doe', new Date(), new Date());
 	}
 }
