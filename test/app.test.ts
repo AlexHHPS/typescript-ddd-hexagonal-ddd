@@ -1,11 +1,11 @@
 import main from '../src/app.js';
 
 describe('main', () => {
-  it('should print "Example Node App!"', () => {
-    console.log = jest.fn();
+	it('should print "Example Node App!"', () => {
+		console.log = jest.fn();
 
-    main();
+		main();
 
-    expect(console.log).toHaveBeenCalledWith('Example Node app!');
-  });
+		expect(console.log).toHaveBeenCalledWith('Example Node app!');
+	});
 });
