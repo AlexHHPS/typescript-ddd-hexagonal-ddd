@@ -27,7 +27,7 @@ export class ExampleController {
 
 	public findUser = async (req: Request, res: Response): Promise<void> => {
 		try {
-			const result: User = await new LocalDBUserRepository().findByCriteria();
+			const result: User = await new LocalDBUserRepository().findByCriteria(req.body.id);
 			res.status(200).json(result);
 		} catch (error) {
 			console.error(error as Error);
