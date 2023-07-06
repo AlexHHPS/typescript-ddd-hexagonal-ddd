@@ -20,7 +20,6 @@ export class ExampleController {
 			});
 			res.status(200).json(result);
 		} catch (error) {
-			// log error
 			console.error(error as Error);
 			throw new ExampleError();
 		}
@@ -31,7 +30,6 @@ export class ExampleController {
 			const result: User = await new LocalDBUserRepository().findByCriteria();
 			res.status(200).json(result);
 		} catch (error) {
-			// log error
 			console.error(error as Error);
 			throw new ExampleError();
 		}
