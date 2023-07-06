@@ -1,13 +1,10 @@
-# TypeScript | Node.js Bootstrap (template)
+# TypeScript | Node.js DDD template
 
-This repository is intended to serve as a starting point if you want to bootstrap a quick TypeScript project.
+This repository is intended to serve as a starting point if you want to bootstrap a DDD TypeScript project.
 
-⚠️ It is meant for simple use cases where you don't need the extra complexity, just a barebones, simple Node.js app. This has its shortcomings:
-  - No proper DI framework/container/tool
-  - No [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) structuring (I strongly suggest a DDD approach)
-    - Coupling of infrastructure and application layers unless you separate them yourself
+⚠️ It is meant for more intricate use cases where you need the extra complexity. This implies a higher maintainability cost.
 
-If these issues don't matter for your intended use, or you know how to fix them, this will be a fast way to run a quick script or program. If you're looking for a more scalable strategy, check my TS DDD template (coming soon™) or if you want a simple API, check out my [TypeScript API Template](https://github.com/BoscoDomingo/typescript-api-skeleton)
+If you're looking for a simpler strategy, check this [barebones TS template](https://github.com/BoscoDomingo/typescript-skeleton) or if you want a simple API, check out this [TypeScript API Template](https://github.com/BoscoDomingo/typescript-api-skeleton)
 
 ## Features
 
