@@ -222,7 +222,7 @@ module.exports = {
     '@typescript-eslint/switch-exhaustiveness-check': 'warn',
     '@typescript-eslint/no-unsafe-assignment': 'warn',
     '@typescript-eslint/restrict-template-expressions': ['warn', { allowNumber: true, allowBoolean: true, allowNullish: true }],
-    'no-console': 'warn',
+    'no-console': 'off',
     'default-param-last': 'off',
     '@typescript-eslint/default-param-last': 'warn',
     'dot-notation': 'off',
