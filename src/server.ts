@@ -12,6 +12,7 @@ export class Server {
 		// DI (Composition Root)
 		const controller = new ExampleController();
 
+		// eslint-disable-next-line @typescript-eslint/no-misused-promises
 		this.app.route('/').get(controller.findUser);
 	}
 
