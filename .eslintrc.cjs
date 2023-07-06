@@ -1,6 +1,6 @@
 module.exports = {
   env: {
-    es2021: true,
+    es2022: true,
     node: true,
   },
   extends: [
@@ -13,12 +13,9 @@ module.exports = {
   ],
   overrides: [
     {
-      files: ['*.ts', '*.tsx'],
-      parserOptions: {
-        project: ['./tsconfig.json'],
+      env: {
+        jest: true,
       },
-    },
-    {
       files: ['test/**'],
       plugins: ['jest'],
       extends: ['plugin:jest/recommended', 'prettier'],
@@ -224,20 +221,45 @@ module.exports = {
     '@typescript-eslint/sort-type-constituents': 'error',
     '@typescript-eslint/switch-exhaustiveness-check': 'warn',
     '@typescript-eslint/no-unsafe-assignment': 'warn',
-    '@typescript-eslint/restrict-template-expressions': 'warn',
+    '@typescript-eslint/restrict-template-expressions': ['warn', { allowNumber: true, allowBoolean: true, allowNullish: true }],
     'no-console': 'warn',
     'default-param-last': 'off',
     '@typescript-eslint/default-param-last': 'warn',
     'dot-notation': 'off',
     '@typescript-eslint/dot-notation': 'error',
     'lines-between-class-members': 'off',
-    '@typescript-eslint/lines-between-class-members': 'warn', // No support from Prettier for this https://github.com/prettier/prettier/issues/1603
+    '@typescript-eslint/lines-between-class-members': [
+      'warn',
+      'always',
+      { exceptAfterSingleLine: true, exceptAfterOverload: true },
+    ], // No support from Prettier for this https://github.com/prettier/prettier/issues/1603
     'no-await-in-loop': 'warn',
     'no-constructor-return': 'error',
     'import/order': [
+      'error',
+      {
+        groups: [
+          'builtin',
+          'external',
+          'internal',
+          'parent',
+          'sibling',
+          'index',
+          'type',
+          'unknown',
+        ],
+      },
+    ],
+    'import/order': [
       'warn',
-      { 'newlines-between': 'always', alphabetize: { order: 'asc' } },
+      {
+        'newlines-between': 'always',
+        alphabetize: { order: 'asc', caseInsensitive: true },
+      },
     ],
     'import/newline-after-import': ['error', { count: 1 }],
+  },
+  settings: {
+    'import/resolver': ['typescript'],
   },
 };

@@ -1,0 +1,48 @@
+name: Format code
+
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    permissions:
+      # To commit and push the changed files
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Cache node modules
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run format
+        run: npm run format
+
+        # Source: https://github.com/marketplace/actions/git-auto-commit
+      - id: auto-commit-changes
+        name: 'Auto commit changes'
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: 'Apply formatting (automatic commit)'
+          skip_dirty_check: false
+
+      - if: steps.auto-commit-changes.outputs.changes_detected == 'false'
+        run: echo "No formatting required"
