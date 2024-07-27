@@ -1,13 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { randomUUID } from 'crypto';
+import { User } from "../../../domain/domain1/entities/user.entity.js";
 
 import { Request, Response } from 'express';
 
 import { CreateUserUseCase } from '../../../application/domain1/createUser/createUserUseCase.js';
 import { CreateUserUseCaseOutput } from '../../../application/domain1/createUser/createUserUseCase.output.js';
 import { ExampleError } from '../../../domain/domain1/example.error.js';
-import { User } from '../../../domain/domain1/user.entity.js';
 import { LocalDBUserRepository } from '../../outgoing/database/localDBUserRepository.adapter.js';
 
 const useCaseExample: CreateUserUseCase = new CreateUserUseCase(new LocalDBUserRepository());

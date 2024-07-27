@@ -1,5 +1,5 @@
-import { User } from '../../../domain/domain1/user.entity.js';
 import { UserRepository } from '../../../domain/domain1/user.repository.js';
+import { User } from "../../../domain/domain1/entities/user.entity.js";
 
 export class LocalDBUserRepository implements UserRepository {
 	public async save(user: User): Promise<void> {
