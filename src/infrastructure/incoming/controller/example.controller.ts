@@ -1,37 +1,56 @@
-import { randomUUID } from 'crypto';
+import type { FastifyInstance } from "fastify";
+import { CreateUserUseCase } from "../../../application/domain1/createUser/createUserUseCase.js";
+import type { CreateUserUseCaseOutput } from "../../../application/domain1/createUser/createUserUseCase.output.js";
 import { User } from "../../../domain/domain1/entities/user.entity.js";
+import { InsertError } from "../../../domain/domain1/errors/insert.error.js";
+import { NotFoundError } from "../../../domain/domain1/errors/notFound.error.js";
+import { UUIDv7 } from "../../../domain/value_objects/uuidv7.js";
+import { LocalDBUserRepository } from "../../outgoing/database/localDBUserRepository.adapter.js";
+import type { CreateUserDTO } from "../dtos/createUser.dto.js";
 
-import { Request, Response } from 'express';
+const useCaseExample: CreateUserUseCase = new CreateUserUseCase(
+	new LocalDBUserRepository(),
+);
 
-import { CreateUserUseCase } from '../../../application/domain1/createUser/createUserUseCase.js';
-import { CreateUserUseCaseOutput } from '../../../application/domain1/createUser/createUserUseCase.output.js';
-import { ExampleError } from '../../../domain/domain1/example.error.js';
-import { LocalDBUserRepository } from '../../outgoing/database/localDBUserRepository.adapter.js';
-
-const useCaseExample: CreateUserUseCase = new CreateUserUseCase(new LocalDBUserRepository());
-
-export class ExampleController {
-	public createUser = async (req: Request, res: Response): Promise<void> => {
+export async function exampleController(
+	fastify: FastifyInstance,
+): Promise<void> {
+	fastify.get<{ Params: { id: string } }>("/:id", async (req, res) => {
 		try {
+			const id = new UUIDv7(req.params.id);
+
+			const result: User = await new LocalDBUserRepository().getById(id);
+
+			res.status(200).send(result);
+		} catch (error) {
+			req.log.error(error as Error);
+			if (error instanceof NotFoundError) {
+				return res.notFound();
+			}
+			res.badRequest((error as Error).message);
+		}
+	});
+
+	fastify.post<{ Body: CreateUserDTO }>("/", async (req, res) => {
+		try {
+			const NOW = new Date();
 			const result: CreateUserUseCaseOutput = await useCaseExample.execute({
-				user: new User(randomUUID(), req.body.id, new Date(), new Date()),
+				user: new User({
+					id: new UUIDv7(),
+					name: req.body.name,
+					createdAt: NOW,
+					updatedAt: NOW,
+				}),
 			});
-			res.status(200).json(result);
-		} catch (error) {
-			// log error
-			console.error(error as Error);
-			throw new ExampleError();
-		}
-	};
 
-	public findUser = async (req: Request, res: Response): Promise<void> => {
-		try {
-			const result: User = await new LocalDBUserRepository().findByCriteria();
-			res.status(200).json(result);
+			res.status(201).send(result);
 		} catch (error) {
-			// log error
-			console.error(error as Error);
-			throw new ExampleError();
+			req.log.error(error as Error);
+			// Do error handling here, to decide if to return a 400 or 500
+			if (error instanceof InsertError) {
+				return res.internalServerError();
+			}
+			res.badRequest((error as Error).message);
 		}
-	};
+	});
 }
