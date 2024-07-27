@@ -52,7 +52,8 @@ export class Server {
 		this.app = fastify({
 			logger: this.loggingConfigs[process.env.NODE_ENV ?? "production"].logging,
 			disableRequestLogging:
-				this.loggingConfigs[process.env.NODE_ENV ?? "production"].disableRequestLogging,
+				this.loggingConfigs[process.env.NODE_ENV ?? "production"]
+					.disableRequestLogging,
 		}).withTypeProvider<TypeBoxTypeProvider>();
 
 		this.app.register(helmet);
