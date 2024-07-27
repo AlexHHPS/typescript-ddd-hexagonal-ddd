@@ -14,32 +14,38 @@ jobs:
       contents: write
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           ref: ${{ github.head_ref }}
 
-      - name: Cache node modules
-        uses: actions/cache@v3
-        env:
-          cache-name: cache-node-modules
+      - uses: actions/setup-node@v4
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
+          node-version-file: ".nvmrc"
+          cache: "pnpm"
 
-      - name: Install dependencies
-        run: npm install
+          # Alternative
+      # - name: Cache node modules
+      #   uses: actions/cache@v3
+      #   env:
+      #     cache-name: cache-node-modules
+      #   with:
+      #     path: ~/.pnpm-store
+      #     key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-build-${{ env.cache-name }}-
+      #       ${{ runner.os }}-build-
+      #       ${{ runner.os }}-
+
+      - name: Install Dependencies
+        run: pnpm i --frozen-lockfile
 
       - name: Run format
-        run: npm run format
+        run: pnpm format
 
         # Source: https://github.com/marketplace/actions/git-auto-commit
       - id: auto-commit-changes
-        name: 'Auto commit changes'
+        name: "Auto commit changes"
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: '(Automatic commit) Apply formatting'
+          commit_message: "style(auto): formatting"
           skip_dirty_check: false
