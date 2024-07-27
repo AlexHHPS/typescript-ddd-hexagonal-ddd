@@ -1,0 +1,16 @@
+export enum Operators {
+	EQUAL = "EQ",
+	NOT_EQUAL = "NE",
+	GREATER_THAN = "GT",
+	GREATER_THAN_OR_EQUAL = "GTE",
+	LESS_THAN = "LT",
+	LESS_THAN_OR_EQUAL = "LTE",
+	EXISTS = "EXISTS",
+	// IN = "IN",
+	// NOT_IN = "NOT_IN",
+	// LIKE = "LIKE",
+	// NOT_LIKE = "NOT_LIKE",
+	// IS_NULL = "IS_NULL",
+	// IS_NOT_NULL = "IS_NOT_NULL",
+	// BETWEEN = "BETWEEN",
+}
