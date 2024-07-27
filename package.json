@@ -1,9 +1,10 @@
 {
-  "name": "typescript-skeleton",
-  "version": "1.0.2",
+  "name": "typescript-skeleton-ddd",
+  "version": "1.0.0",
   "type": "module",
-  "description": "A simple TypeScript skeleton for easy tasks. For anything more complex, a DDD structure is recommended.",
+  "description": "A TypeScript skeleton for DDD projects.",
   "main": "src/app.ts",
+  "private": true,
   "scripts": {
     "start": "node ./dist/src/app.js",
     "dev": "ts-node-dev --rs --transpile-only ./src/app.ts",
@@ -17,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/BoscoDomingo/typescript-skeleton.git"
+    "url": "git+https://github.com/AlexHHPS/typescript-ddd-hexagonal-ddd.git"
   },
   "keywords": [
     "skeleton",
@@ -26,9 +27,9 @@
   "author": "Bosco Domingo",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/BoscoDomingo/typescript-skeleton/issues"
+    "url": "https://github.com/AlexHHPS/typescript-ddd-hexagonal-ddd/issues"
   },
-  "homepage": "https://github.com/BoscoDomingo/typescript-skeleton#readme",
+  "homepage": "https://github.com/AlexHHPS/typescript-ddd-hexagonal-ddd#readme",
   "dependencies": {
     "dotenv": "^16.0.3",
     "express": "^4.18.2"
