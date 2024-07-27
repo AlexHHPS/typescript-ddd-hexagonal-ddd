@@ -3,15 +3,50 @@
 	"organizeImports": {
 		"enabled": true
 	},
+	"files": {
+		"include": ["**/src/**/*", "**/test/**/*", "**/tests/**/*"],
+		"ignore": [
+			"**/node_modules/**/*",
+			"**/dist/**/*",
+			"**/lib/**/*",
+			"**/build/**/*",
+			"**/out/**/*",
+			"**/.github/**/*",
+			"**/requests/**/*",
+			"**/*.toml",
+			"**/*.bru",
+			"**/*.example",
+			"**/.nvmrc",
+			"**/*.md",
+			"**/*.yaml",
+			"**/*.yml",
+			"**/*.dockerignore",
+			"**/*.Dockerfile",
+			"**/Dockerfile"
+		]
+	},
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"recommended": true
+			"recommended": true,
+			"complexity": {
+				"noStaticOnlyClass": "off"
+			},
+			"style": {
+				"noNonNullAssertion": "warn"
+			},
+			"suspicious": {
+				"noExplicitAny": "warn",
+				"noConfusingVoidType": "warn"
+			},
+			"correctness": {
+				"noUnnecessaryContinue": "warn"
+			}
 		}
 	},
 	"formatter": {
 		"enabled": true,
-		"formatWithErrors": false,
+		"formatWithErrors": true,
 		"ignore": [],
 		"attributePosition": "auto",
 		"indentStyle": "tab",
@@ -19,9 +54,10 @@
 		"lineWidth": 80,
 		"lineEnding": "lf"
 	},
+
 	"javascript": {
 		"formatter": {
-			"arrowParentheses": "always",
+			"arrowParentheses": "asNeeded",
 			"bracketSameLine": false,
 			"bracketSpacing": true,
 			"jsxQuoteStyle": "double",
@@ -32,7 +68,19 @@
 	},
 	"json": {
 		"formatter": {
-			"trailingCommas": "none"
+			"trailingCommas": "none",
+			"indentStyle": "tab",
+			"indentWidth": 2
+		},
+		"parser": {
+			"allowComments": true,
+			"allowTrailingCommas": true
 		}
+	},
+	"vcs": {
+		"enabled": true,
+		"useIgnoreFile": true,
+		"clientKind": "git",
+		"root": "./"
 	}
 }
