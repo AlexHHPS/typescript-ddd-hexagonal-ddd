@@ -1,25 +1,19 @@
 import type { FastifyInstance } from "fastify";
-import { CreateUserUseCase } from "../../../application/domain1/createUser/createUserUseCase.js";
-import type { CreateUserUseCaseOutput } from "../../../application/domain1/createUser/createUserUseCase.output.js";
-import { User } from "../../../domain/domain1/entities/user.entity.js";
-import { InsertError } from "../../../domain/domain1/errors/insert.error.js";
-import { NotFoundError } from "../../../domain/domain1/errors/notFound.error.js";
+import { CreateUserUseCase } from "../../../application/createUser/createUserUseCase.js";
+import type { CreateUserUseCaseOutput } from "../../../application/createUser/createUserUseCase.output.js";
+import { User } from "../../../domain/entities/user.entity.js";
+import { InsertError } from "../../../domain/errors/insert.error.js";
+import { NotFoundError } from "../../../domain/errors/notFound.error.js";
 import { UUIDv7 } from "../../../domain/value_objects/uuidv7.js";
-import { LocalDBUserRepository } from "../../outgoing/database/localDBUserRepository.adapter.js";
-import type { CreateUserDTO } from "../dtos/createUser.dto.js";
+import { LocalDBUserRepository } from "../../database/localDBUserRepository.adapter.js";
+import type { CreateUserDTO } from "../dtos/incoming/createUser.dto.js";
 
-const useCaseExample: CreateUserUseCase = new CreateUserUseCase(
-	new LocalDBUserRepository(),
-);
-
-export async function exampleController(
-	fastify: FastifyInstance,
-): Promise<void> {
+export async function usersController(fastify: FastifyInstance): Promise<void> {
 	fastify.get<{ Params: { id: string } }>("/:id", async (req, res) => {
 		try {
 			const id = new UUIDv7(req.params.id);
 
-			const result: User = await new LocalDBUserRepository().getById(id);
+			const result = await new LocalDBUserRepository().getById(id);
 
 			res.status(200).send(result);
 		} catch (error) {
@@ -34,14 +28,18 @@ export async function exampleController(
 	fastify.post<{ Body: CreateUserDTO }>("/", async (req, res) => {
 		try {
 			const NOW = new Date();
-			const result: CreateUserUseCaseOutput = await useCaseExample.execute({
+			const createUserUseCase = new CreateUserUseCase(
+				new LocalDBUserRepository(),
+			);
+
+			const result = (await createUserUseCase.execute({
 				user: new User({
 					id: new UUIDv7(),
 					name: req.body.name,
 					createdAt: NOW,
 					updatedAt: NOW,
 				}),
-			});
+			})) satisfies CreateUserUseCaseOutput;
 
 			res.status(201).send(result);
 		} catch (error) {

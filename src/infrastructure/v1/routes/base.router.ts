@@ -1,7 +1,9 @@
 import type { FastifyInstance } from "fastify";
-import { exampleController } from "../incoming/controller/example.controller.js";
+import { usersController } from "../controller/users.controller.js";
 
 export default async function BaseRouter(fastify: FastifyInstance) {
-	fastify.register(exampleController);
+	fastify.register(usersController, {
+		prefix: "/v1/users",
+	});
 	// Add more routes here
 }
