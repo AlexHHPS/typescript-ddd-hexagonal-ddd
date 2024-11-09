@@ -9,11 +9,7 @@ export class UUIDv7 {
 			return;
 		}
 
-		if (
-			!value?.match(
-				/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/,
-			)
-		) {
+		if (!UUIDv7.validate(value)) {
 			throw new Error("Invalid UUIDv7 format");
 		}
 
