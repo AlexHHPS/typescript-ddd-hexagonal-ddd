@@ -1,5 +1,5 @@
 import closeWithGrace from "close-with-grace";
-import { Server } from "./server.js";
+import { Server } from "./infrastructure/server.js";
 
 // This is generally not a good practice for libraries,
 // but since it is for internal use only, it is acceptable.

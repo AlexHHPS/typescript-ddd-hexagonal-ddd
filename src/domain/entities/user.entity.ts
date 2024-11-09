@@ -1,4 +1,4 @@
-import { UUIDv7 } from "../../value_objects/uuidv7.js";
+import { UUIDv7 } from "../value_objects/uuidv7.js";
 
 export class User {
 	readonly id: UUIDv7 = new UUIDv7();

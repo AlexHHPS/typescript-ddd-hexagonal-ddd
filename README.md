@@ -6,6 +6,7 @@ This repository is intended to serve as a starting point if you want to bootstra
   - No proper DI framework/container/tool (just simple DI via constructor injection)
   - Logging tied to the framework (Fastify)
   - Ready for events, but not yet implemented
+  - Criteria pattern with SQL translation coming soon™️
 
 If these issues don't matter for your intended use, or you know how to fix them, this will be a fast way to run a quick script or program.
 If you're looking for a simpler setup, check out my [TypeScript API Template](https://github.com/BoscoDomingo/typescript-api-skeleton) or my [TypeScript Simple Setup](https://github.com/BoscoDomingo/typescript-skeleton)

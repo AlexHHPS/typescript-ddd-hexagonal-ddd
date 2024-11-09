@@ -1,4 +1,4 @@
-import type { UserRepository } from "../../../domain/domain1/repositories/user.repository.js";
+import type { UserRepository } from "../../domain/repositories/user.repository.js";
 import type { CreateUserUseCaseInput } from "./createUserUseCase.input.js";
 import type { CreateUserUseCaseOutput } from "./createUserUseCase.output.js";
 

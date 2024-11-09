@@ -6,7 +6,7 @@ import type { TypeBoxTypeProvider } from "@fastify/type-provider-typebox";
 import type { FastifyInstance, FastifyLoggerOptions } from "fastify";
 import fastify from "fastify";
 import type { PinoLoggerOptions } from "fastify/types/logger.js";
-import BaseRouter from "./infrastructure/routes/base.router.js";
+import BaseRouter from "./v1/routes/base.router.js";
 
 export class Server {
 	readonly app: FastifyInstance;

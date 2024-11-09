@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { User } from "@src/domain/domain1/entities/user.entity.ts";
-import { UUIDv7 } from "@src/domain/value_objects/uuidv7.ts";
+import { User } from "../../../src/domain/entities/user.entity.js";
+import { UUIDv7 } from "../../../src/domain/value_objects/uuidv7.js";
 
 describe("Unit: User", () => {
 	it("should throw an error when the id is not 32 characters long", () => {
